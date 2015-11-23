@@ -41,9 +41,6 @@ namespace Task1
             BookList.Sort(comparer);
         }
 
-        public IEnumerable<Book> FindBooksByTags(Predicate<Book> tags)
-        {
-            return BookList.FindAll(tags);
-        }
+        public IEnumerable<Book> FindBooksByTags(Predicate<Book> tags)=> BookList.FindAll(tags);
     }
 }

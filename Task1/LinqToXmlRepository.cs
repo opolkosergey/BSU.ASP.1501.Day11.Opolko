@@ -39,18 +39,14 @@ namespace Task1
 
         public void Save(IEnumerable<Book> books)
         {
-            var list = new List<XElement>();
-            var listValues = new List<XElement>();
+            var xDoc = new XElement("Books",
+                books.Select(b => 
+                    new XElement("Book",
+                    new XElement("Author", b.Author),
+                    new XElement("Title", b.Title),
+                    new XElement("Price", b.Price),
+                    new XElement("Pages", b.Price))));
 
-            foreach (var book in books)
-            {
-                listValues.Clear();
-                listValues.AddRange(typeof(Book).GetProperties()
-                    .Select(p => new XElement(p.Name, typeof(Book).GetProperty(p.Name).GetValue(book))));
-                list.Add(new XElement("Book", listValues));
-            }
-
-            XDocument xDoc = new XDocument(new XElement("Books", list));
             xDoc.Save(Path + ".xml");
         }
     }
